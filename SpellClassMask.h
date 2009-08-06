@@ -37,7 +37,7 @@
 #ifndef SPELL_CLASS_MASK_H
 #define SPELL_GLASS_MASK_H
 
-#include<bitset>
+#include "../shared/astd/bitset.h"
 #include<cassert>
 #include<cstdarg>
 
@@ -1569,11 +1569,11 @@ enum CLASS_FLAG
 
 
 
-class SpellCM : public std::bitset<96>
+class SpellCM : public astd::bitset<96>
 { //Loki: deriving this from a bitset so we can use all the operators
   //NOTE: you can use this like an uint32 array or like a bitset
 
-	typedef std::bitset<96> bitset;
+	typedef astd::bitset<96> bitset;
 	typedef uint32* u32p;
 	typedef const uint32* const const_u32pc;
 public:
@@ -1630,7 +1630,7 @@ public:
 		assert(n >= 0 && n < 3);
 		return *((const u32p)this+n);
 	}
-	inline SpellCM& operator= (const SpellCM& sg) { bits() = sg.bits(); }
+	inline SpellCM& operator= (const SpellCM& sg) { bits() = sg.bits(); return *this; }
 	inline operator bool() const { return any(); }
 	inline SpellCM operator& (const SpellCM& sg) const { return SpellCM(bits() & sg.bits()); }
 	inline SpellCM operator| (const SpellCM& sg) const { return SpellCM(bits() | sg.bits()); }
